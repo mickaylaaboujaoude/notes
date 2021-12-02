@@ -1,0 +1,56 @@
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-data-transformation/articles/discretizing-numerical-data-and-collapsing-categories
+
+import pandas as pd
+ 
+# Load in data
+dance_class = pd.read_csv('dance_class_data.csv')
+ 
+# Print the first 10 rows 
+print(dance_class.head(10))
+
+print(dance_class.dtypes)
+
+# Store the ages
+student_ages = dance_class['Age'] 
+ 
+BINNING STARTS HERE
+# min() method returns the lowest value
+print(student_ages.min()) # 23
+ 
+# max() method returns the highest value
+print(student_ages.max()) # 65
+
+# Store the boundaries
+bins = [20, 30, 40, 50, 60, 70]
+
+# Create new binned_age column that bins the values of the ‘Age’ column
+dance_class['binned_age'] = pd.cut(dance_class['Age'], bins)
+ 
+# Print the first few rows of the data
+print(dance_class[['binned_age', 'Age']].head())
+
+
+BAR GRAPH
+# Plot the bar graph of binned ages
+dance_class['binned_age'].value_counts().plot(kind='bar')
+ 
+# Label the bar graph 
+plt.title('Dance Class Age Distribution')
+plt.xlabel('Ages')
+plt.ylabel('Count') 
+ 
+# Show the bar graph 
+plt.show()
+
+-
+OPTIONAL: adding labels to bins
+If we want, we can also specify labels for our bins using a labels argument:
+
+# Store the boundaries
+bins = [20, 30, 40, 50, 60, 70]
+ 
+# Store the labels for our bins
+age_labels = ['Young Adult', 'Adult', 'Middle Aged', 'Middle-Older Age', 'Senior']
+ 
+# Bin the values of the 'Age' column and specify the labels 
+dance_class['binned_age'] = pd.cut(dance_class['Age'], bins, labels = age_labels)

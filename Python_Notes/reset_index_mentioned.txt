@@ -1,0 +1,10 @@
+9/4/21
+
+.reset_index() is mentioned in two different contexts and appears to do similar yet slightly different things
+
+
+Slide 14/15
+https://www.codecademy.com/paths/data-analyst/tracks/dscp-data-manipulation-with-pandas/modules/dscp-hands-on-with-pandas/lessons/pandas-i/exercises/reset-index
+
+Slide 4/8
+https://www.codecademy.com/paths/data-analyst/tracks/dscp-data-manipulation-with-pandas/modules/dscp-aggregates-in-pandas/lessons/pandas-aggregates/exercises/groupby-ii

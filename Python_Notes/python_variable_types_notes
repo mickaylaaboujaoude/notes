@@ -1,0 +1,42 @@
+(https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-variable-types/lessons/variable-types/exercises/one-hot-encoding "from Codecademy Data Analyst, Variable Types Lesson")
+
+
+dtypes
+
+print(cereal.dtypes)
+creates list of all the data types in dataframe
+
+
+
+Pandas Category Data Type (slide 7)
+
+print(movies['rating'].unique())
+# Output
+[PG, R, G, PG-13, UNRATED, NOT RATED]
+The pandas .Categorical() method can be used to store data as type category and indicate the order of the categories.
+movies['rating'] = pd.Categorical(movies['rating'], ['G', 'PG', 'PG-13', 'R','UNRATED', 'NOT RATED'], ordered=True)
+Now, not only does Python recognize that the rating column is an ordinal variable, it understands that G < PG < PG-13 < R < UNRATED < NOT RATED. If we call .unique() on this column again, we see how Python retains the correct rankings.
+print(movies['rating'].unique())
+# Output
+[PG, R, G, PG-13, UNRATED, NOT RATED]
+Categories (6, object): [G < PG < PG-13 < UNRATED < NOT RATED]
+This is helpful in the event that we would like to sort the column by category; if we use .sort_values(), the dataframe will be sorted by the logical order of the rating column as opposed to the alphabetical order.
+
+
+
+Label Encoding with .cat.codes
+
+When working with categorical variables, it is sometimes necessary to convert the categories to numbers. This is called categorical encoding and can be achieved through several encoding methods.
+Label encoding is when we specifically convert each category in a variable to an integer.
+In order to perform label encoding in pandas, we can use the .cat.codes accessor for any variable stored as type category.
+movies['rating_codes'] = movies['rating'].cat.codes
+
+
+
+One-Hot Encoding
+With OHE, we essentially create a new binary variable for each of the categories within our original variable.
+titanic = pd.get_dummies(data=titanic, columns=['Embarked'])
+creates a bunch of 1 0 columns for each item in a column
+
+
+

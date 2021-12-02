@@ -1,0 +1,82 @@
+'''
+9/4/21
+selecting rows and columns in python pandas dataframes
+https://www.codecademy.com/paths/data-analyst/tracks/dscp-data-manipulation-with-pandas/modules/dscp-hands-on-with-pandas/lessons/pandas-i/exercises/review-i
+https://www.codecademy.com/learn/paths/data-analyst/tracks/dscp-data-manipulation-with-pandas/modules/dscp-hands-on-with-pandas/cheatsheet
+'''
+COLUMNS
+--
+Select Single Column
+When we select a single column, the result is called a Series.
+
+There are two possible syntaxes for selecting all values from a column:
+
+dataframe_name['column_name'] 
+Select the column as if you were selecting a value from a dictionary using a key.
+
+
+dataframe_name.column_name
+If the name of a column follows all of the rules for a variable name (doesn’t start with a number, doesn’t contain spaces or special characters, etc.), then you can select it using the above notation.
+
+--
+
+Select Multiple Columns
+When we select multiple columns, we create a new dataframe. 
+When selecting multiple columns from a DataFrame, you can order the columns however you would like them to appear.
+
+new_dataframe = old_dataframe_name[['column_name_1', 'column_name_2']]
+
+--
+
+Select a Single Row
+When we select a single row, the result is a Series (just like when we select a single column).
+DataFrames are zero-indexed, meaning that we start with the 0th row and count up from there. 
+
+dataframe_name.iloc[row_index]
+orders.iloc[2]
+
+--
+
+Select Multiple Rows
+I am 99% sure that the result of selecting multiple rows is a DataFrame that is a subset of the original DataFrame, but Codecademy didn't excplicity say this on this page.
+Codecademy mentions what the result of selecting multiple rows is when talking about selecting multiple rows with logical operators. 
+
+Here are some different ways of selecting multiple rows:
+
+orders.iloc[3:7] would select all rows starting at the 3rd row and up to but not including the 7th row (i.e., the 3rd row, 4th row, 5th row, and 6th row)
+
+orders.iloc[:4] would select all rows up to, but not including the 4th row (i.e., the 0th, 1st, 2nd, and 3rd rows)
+
+orders.iloc[-3:] would select the rows starting at the 3rd to last row and up to and including the final row
+
+--
+
+Select Multiple Rows With Logical Operators
+
+df[df.MyColumnName == desired_column_value]
+df[df.age == 30]
+
+# Selecting rows where age is over 20
+df[df.age > 20]
+ 
+# Selecting rows where name is not John
+df[df.name != "John"]
+ 
+# Selecting rows where age is less than 10
+# OR greater than 70
+df[(df.age < 10) | (df.age > 70)]
+
+
+--
+
+You should really just stop accessing columns as attributes and get into the habit of accessing using square brackets []. This avoids errors where your column names have illegal characters in python, embedded spaces, where your column name shares the same name as a built-in method, and ambiguous usage where for instance you have a column named index:
+
+https://stackoverflow.com/questions/44798031/when-should-i-use-dt-column-vs-dtcolumn-pandas
+
+
+---
+
+Print out all rows with missing values 
+print(diabetes_data[diabetes_data.isnull().any(axis=1)])
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-data-wrangling-and-tidying/modules/dacp-exploratory-data-analysis-for-data-wrangling-and-tidying/projects/data-cleaning-project

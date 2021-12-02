@@ -1,0 +1,9 @@
+Commands to gather info about the dataframe
+
+#print(us_census)
+#print(us_census.head())
+#print(us_census.info())
+#print(us_census.columns)
+#print(us_census.dtypes)
+#print(len(us_census.State))
+#print(us_census.State.nunique()) 

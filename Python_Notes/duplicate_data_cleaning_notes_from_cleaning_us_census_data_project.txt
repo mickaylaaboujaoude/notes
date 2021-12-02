@@ -1,0 +1,44 @@
+Additional data cleaning notes: 
+
+use  print(dataframe.series.unique()) to see the missing values in an object type
+Then you can replace the missing values with None or nan
+
+
+
+
+# Replace missing values to None
+auto['city-mpg'] = auto['city-mpg'].replace(['missing'], np.nan)
+print(auto['city-mpg'].unique())
+
+Then use .astype() to change the column type
+
+# Change data type
+auto['city-mpg'] = auto['city-mpg'].astype('float')
+
+
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-variable-types/articles/intro-to-variable-types
+
+
+
+The pandas .Categorical() method can be used to store data as type category and indicate the order of the categories.
+
+movies['rating'] = pd.Categorical(movies['rating'], ['G', 'PG', 'PG-13', 'R','UNRATED', 'NOT RATED'], ordered=True)
+
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-variable-types/lessons/variable-types/exercises/the-pandas-category-data-type
+
+
+Label encoding is when we specifically convert each category in a variable to an integer.
+
+In order to perform label encoding in pandas, we can use the .cat.codes accessor for any variable stored as type category. 
+movies['rating_codes'] = movies['rating'].cat.codes
+
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-variable-types/lessons/variable-types/exercises/label-encoding-with-cat-codes
+
+Another way of encoding categorical variables is called One-Hot Encoding (OHE). With OHE, we essentially create a new binary variable for each of the categories within our original variable
+titanic = pd.get_dummies(data=titanic, columns=['Embarked'])
+print(titanic.head())
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-variable-types/lessons/variable-types/exercises/one-hot-encoding

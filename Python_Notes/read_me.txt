@@ -1,0 +1,2 @@
+documents/codecademy/projects/notes
+Will contain notes about common operations and the code used to execute them. The actual data file is not necessary. It' s to give an example of "if you want this, do this; and here is where to learn more"

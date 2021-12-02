@@ -1,0 +1,34 @@
+Steps to cleaning data
+
+loading a csv into a pandas dataframe 
+
+df = pd.read_csv(filename, index_col=0) 
+
+
+On index_col=0
+
+I don't see it in the pandas.read_csv documentation mentioning index_col=0, rather I see index_col=False.
+
+From pandas.read_csv documentation:
+Note: index_col=False can be used to force pandas to not use the first column as the index, e.g. when you have a malformed file with delimiters at the end of each line.
+https://pandas.pydata.org/pandas-docs/dev/reference/api/pandas.read_csv.html
+
+From Stack Overflow:
+You could also optionally tell read_csv that the first column is the index column by passing index_col=0:
+https://stackoverflow.com/questions/36519086/how-to-get-rid-of-unnamed-0-column-in-a-pandas-dataframe
+
+
+loading multiple csvs into one dataframe
+
+import glob
+files = glob.glob("states*.csv")
+df_list = []
+for filename in files:
+  data = pd.read_csv(filename, index_col=0)
+  df_list.append(data)
+us_census = pd.concat(df_list)
+
+# Resetting index
+#print(us_census.columns)
+#print(us_census)
+us_census.reset_index(inplace=True, drop=True)

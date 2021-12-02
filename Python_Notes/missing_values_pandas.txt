@@ -1,0 +1,51 @@
+# Check if missing - I took a detour to learn different ways of checking for missing values
+
+#use  print(dataframe.series.unique()) to see the missing values in an object type
+#then you can replace the missing values with None or nan
+
+# this prints out us census table but for each value it is either true or false depending on whether it is null
+#print(pd.isna(us_census))
+
+
+# this iterates through each row, printing whether it is null 
+#print(pd.isna(us_census['Hispanic']))
+
+
+#this tells us there are null values somewhere in us_census
+#print(us_census.isnull().values.any())
+
+
+# this prints the rows that include null values
+#print(us_census[us_census.isnull().any(axis=1)])
+
+
+# this prints out the sum of null values by column 
+#print(us_census.isnull().sum())
+
+
+# this command will give us the sum of null values in a column 
+#print(us_census.Hispanic.isnull().sum())
+
+
+#print(us_census.isnull().sum()) #I chose to use this one to check for missing values
+# based on the results from the above, we know that us_census.Pacific is the only column still missing values
+# and we know the count of missing values in the us_census.Pacific column 
+
+
+
+# Replace missing values to None
+auto['city-mpg'] = auto['city-mpg'].replace(['missing'], np.nan)
+print(auto['city-mpg'].unique())
+
+Then use .astype() to change the column type
+
+# Change data type
+auto['city-mpg'] = auto['city-mpg'].astype('float')
+
+
+------
+
+Print out all rows with missing values 
+print(diabetes_data[diabetes_data.isnull().any(axis=1)])
+
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-data-wrangling-and-tidying/modules/dacp-exploratory-data-analysis-for-data-wrangling-and-tidying/projects/data-cleaning-project

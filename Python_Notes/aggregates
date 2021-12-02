@@ -1,0 +1,115 @@
+Aggregates
+https://www.codecademy.com/paths/data-analyst/tracks/dscp-data-manipulation-with-pandas/modules/dscp-aggregates-in-pandas/lessons/pandas-aggregates/exercises/column-statistics
+
+
+df.column_name.command()
+
+Command	Description
+mean	Average of all values in column
+std	Standard deviation
+median	Median
+max	Maximum value in column
+min	Minimum value in column
+count	Number of values in column
+nunique	Number of unique values in column
+unique	List of unique values in column
+
+
+-------
+
+GROUPBY
+
+df.groupby('column1').column2.measurement()
+
+column1 is the column that we want to group by ('student' in our example)
+column2 is the column that we want to perform a measurement on (grade in our example)
+measurement is the measurement function we want to apply (mean in our example)
+
+the groupby function creates a new Series, not a DataFrame
+
+Usually, we’d prefer that those indices were actually a column. 
+(# as opposed to a series label)
+In order to get that, we can use reset_index(). 
+This will transform our Series into a DataFrame and move the indices into their own column.
+
+RESET INDEX
+Generally, you’ll always see a groupby statement followed by reset_index:
+df.groupby('column1').column2.measurement().reset_index()
+
+RENAME RESULT COLUMN
+When we use groupby, we often want to rename the column we get as a result. 
+For example, suppose we have a DataFrame teas containing data on types of tea:
+We want to find the number of each category of tea we sell. We can use:
+
+teas_counts = teas.groupby('category').id.count().reset_index()
+
+	category	id
+0	black		3
+1	green		4
+
+The new column contains the counts of each category of tea sold. 
+However, this column is called id because we used the id column of teas to calculate the counts. We actually want to call this column counts.
+Remember that we can rename columns:
+
+teas_counts = teas_counts.rename(columns={"id": "counts"})
+
+	category	counts
+0	black		3
+1	green		4
+
+
+---
+
+USING APPLY AND LAMBDA FUNCTIONS WITH GROUPBY (slide 5/8)
+
+Sometimes, the operation that you want to perform is more complicated than mean or count. In those cases, you can use the apply method and lambda functions, just like we did for individual column operations. Note that the input to our lambda function will always be a list of values.
+A great example of this is calculating percentiles. 
+
+If we want to calculate the 75th percentile (i.e., the point at which 75% of employees have a lower wage and 25% have a higher wage) for each category, we can use the following combination of apply and a lambda function:
+
+PERCENTILE
+# np.percentile can calculate any percentile over an array of values
+high_earners = df.groupby('category').wage
+    .apply(lambda x: np.percentile(x, 75))
+    .reset_index()
+
+The output, high_earners might look like this:
+category		wage
+0	design		23
+1	marketing	35
+2	product		48
+
+
+---
+
+GROUPBY  MORE THAN ONE COLUMN (slide 6/8)
+
+Sometimes, we want to group by more than one column. We can easily do this by passing a list of column names into the groupby method.
+df.groupby(['Location', 'Day of Week'])['Total Sales'].mean().reset_index()
+
+
+Location	Day of Week	Total Sales
+Chelsea		M		402.50
+Chelsea		Tu		422.75
+Chelsea		W		452.00
+…		
+West Village	M		390
+West Village	Tu		400
+…		
+
+
+---
+
+PIVOT TABLES (slide 7/8)
+
+When we perform a groupby across multiple columns, we often want to change how our data is stored. 
+
+Basically we're reformatting the presentation of the data. 
+
+Reorganizing a table in this way is called pivoting. The new table is called a pivot table.
+
+Just like with groupby, the output of a pivot command is a new DataFrame, but the indexing tends to be “weird”, so we usually follow up with .reset_index().
+
+df.pivot(columns='ColumnToPivot',
+         index='ColumnToBeRows',
+         values='ColumnToBeValues')

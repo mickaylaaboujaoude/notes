@@ -1,0 +1,84 @@
+
+Function declaration
+
+function name([param[, param[, ... param]]]) {
+   statements
+}
+
+
+(Are all anonymous functions considered function expressions?)
+
+Traditional Anonymous Function - this one is from MDN Arrow Functions
+
+function (a){
+  return a + 100;
+} 
+
+Anonymous function expression
+
+var myFunction = function() {
+    statements
+}
+
+
+Named function expression
+
+var myFunction = function namedFunction(){
+    statements
+}
+
+
+
+
+Arrow Function Expression
+An arrow function expression is a compact alternative to a traditional function expression, but is limited and can't be used in all situations. - MDN Arrow Functions
+Does not have its own bindings to this or super, and should not be used as methods.- MDN Arrow Functions
+
+
+Ignore what Codecademy says on the difference between function expressions and anonymous functions
+
+just use the MDN docs 
+*******
+Functions
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions
+
+Function expression
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function
+
+Arrow functions
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+*******
+
+
+
+
+Links About Functions: 
+Codecademy Lesson on JavaScript functions
+https://www.codecademy.com/paths/full-stack-engineer-career-path/tracks/fscp-javascript-syntax-part-i/modules/fecp-learn-javascript-syntax-functions/lessons/functions/exercises/intro-to-functions
+Codcecademy cheatsheet on JavaScript functions
+https://www.codecademy.com/learn/paths/full-stack-engineer-career-path/tracks/fscp-javascript-syntax-part-i/modules/fecp-learn-javascript-syntax-functions/cheatsheet
+
+
+-----------------------------
+A note about calling/logging functions from 
+https://www.codecademy.com/paths/full-stack-engineer-career-path/tracks/fscp-javascript-syntax-part-i/modules/fecp-practice-javascript-syntax-variables-data-types-conditionals-functions/lessons/javascript-fundamentals-code-challenge/exercises/introduction
+
+// Write your function here:
+
+// Regular function declaration (named function)
+function greetWorld() {
+  return "Hello, World!";
+}
+
+//Write code to test your function. Even if we provide code to test your function, you should add further tests to make sure your function works correctly in all the specified situations
+
+let x = greetWorld();
+console.log(x);
+// prints Hello, World!
+
+console.log(greetWorld);
+// prints [Function: greetWorld]
+
+console.log(greetWorld());
+// prints Hello, World!

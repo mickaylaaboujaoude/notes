@@ -1,0 +1,22 @@
+https://www.codecademy.com/paths/data-analyst/tracks/dacp-summary-statistics/modules/dacp-data-transformation/articles/discretizing-numerical-data-and-collapsing-categories
+
+Combining Categories in Python
+
+
+import pandas as pd
+ 
+# read in data
+election_data = pd.read_csv('election_data.csv')
+ 
+# get the counts for each candidate
+votes = election_data['Vote'].value_counts()
+print(votes)
+
+it makes sense to collapse the other candidates into a category called “Other."
+
+How can we do this in Python? We can create a mask for values occurring less than a specific number of times in votes. In our case, we’ll check for values occurring less than 200 times. We do this using the isin() function:
+
+mask = election_data.isin(votes[votes < 200].index)
+
+election_data[mask] = 'Other' #label these categories as "Other"
+print(election_data['Vote'].value_counts()) #print the updated vote count
